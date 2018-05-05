@@ -24,10 +24,13 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
+//Route to admin page
 Route::get('/admin', function(){
 
     return view('admin.index');
 });
+
+//Route to User in admin page
 
 Route::resource('admin/users', 'AdminUsersController');
 

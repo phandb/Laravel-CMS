@@ -13,7 +13,7 @@ class AddPhotoIdToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            //add column photo_id
             $table->string('photo_id');
         });
     }

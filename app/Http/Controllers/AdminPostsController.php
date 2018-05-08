@@ -8,6 +8,9 @@ use App\Http\Requests;
 
 class AdminPostsController extends Controller
 {
+
+    
+  /************INDEX********************** */
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +19,9 @@ class AdminPostsController extends Controller
     public function index()
     {
         //
+        return view('admin.posts.index');
     }
-
+/************************CREATE************************************ */
     /**
      * Show the form for creating a new resource.
      *
@@ -26,8 +30,9 @@ class AdminPostsController extends Controller
     public function create()
     {
         //
+        return view('admin.posts.create');
     }
-
+/********************STORE****************************************** */
     /**
      * Store a newly created resource in storage.
      *
@@ -38,7 +43,7 @@ class AdminPostsController extends Controller
     {
         //
     }
-
+/***********************SHOW***************************************** */
     /**
      * Display the specified resource.
      *
@@ -49,7 +54,7 @@ class AdminPostsController extends Controller
     {
         //
     }
-
+/*******************EDIT*********************************** */
     /**
      * Show the form for editing the specified resource.
      *
@@ -60,7 +65,7 @@ class AdminPostsController extends Controller
     {
         //
     }
-
+/**********************UPDATE******************************* */
     /**
      * Update the specified resource in storage.
      *
@@ -72,7 +77,7 @@ class AdminPostsController extends Controller
     {
         //
     }
-
+/************************DESTROY************************* */
     /**
      * Remove the specified resource from storage.
      *

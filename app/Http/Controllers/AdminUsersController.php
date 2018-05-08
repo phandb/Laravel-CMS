@@ -6,9 +6,13 @@ use App\User;
 use App\Role;
 use App\Http\Requests\UsersRequest;
 use App\Http\Requests\UsersEditRequest;
+use App\Http\Middleware\Admin;
+//use App\Http\Middleware\Auth;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
+use File;
+
 
 class AdminUsersController extends Controller
 {
@@ -77,6 +81,8 @@ class AdminUsersController extends Controller
        //encript password
       
        User::create($input);
+
+       Session::flash('created_user', 'The user has been created');
 
         return redirect('/admin/users');
 
@@ -165,6 +171,18 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
-        return view('admin.users.delete');
+        $user = User::findOrFail($id);
+        if(isset($user->photo->file)){
+             //Delete image file in Images folder
+
+        unlink(public_path() . $user->photo->file);
+
+        }
+       
+
+        $user->delete();
+
+        Session::flash('deleted_user', 'The user has been deleted');
+        return redirect('/admin/users');
     }
 }

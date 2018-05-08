@@ -30,9 +30,20 @@ Route::get('/admin', function(){
     return view('admin.index');
 });
 
+//Create a route group on 050718
+
+Route::group(['middleware'=>'admin'], function(){
+
 //Route to User in admin page
 
 Route::resource('admin/users', 'AdminUsersController');
+
+//Route to Posts in admin page
+Route::resource('admin/posts', 'AdminPostsController');
+
+});
+
+
 
 Route::auth();
 

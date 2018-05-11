@@ -9,6 +9,7 @@ use App\Post;
 use App\Photo;
 use App\User;
 use App\Role;
+use App\Category;
 use App\Http\Requests\PostsCreateRequest;
 use App\Http\Requests\PostsEditRequest;
 use App\Http\Middleware\Admin;
@@ -41,8 +42,9 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        //
-        return view('admin.posts.create');
+        //Pass in category names
+        $categories = Category::lists('name','id')->all();
+        return view('admin.posts.create', compact('categories'));
     }
 /********************STORE****************************************** */
     /**

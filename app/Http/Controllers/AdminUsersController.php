@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
 use File;
+//use App\Http\Controllers\Auth;
 
 
 class AdminUsersController extends Controller

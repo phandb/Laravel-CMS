@@ -42,6 +42,9 @@ Route::group(['middleware'=>'admin'], function(){
     
     //Route to Posts in admin page
     Route::resource('admin/posts', 'AdminPostsController');
+    
+    //Route to Categories in admin page
+    Route::resource('admin/categories', 'AdminCategoriesController');
 
 });
 

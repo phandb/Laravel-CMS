@@ -23,6 +23,9 @@ class CreatePostsTable extends Migration
             $table->string('author');
             $table->string('content');
             $table->timestamps();
+
+            //Set up delete relationship.  When user is deleted--> all posts associated with the user deleted
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -34,5 +37,6 @@ class CreatePostsTable extends Migration
     public function down()
     {
         Schema::drop('posts');
+        $table->dropForeign('posts_user_id_foreign');
     }
 }

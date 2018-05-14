@@ -46,6 +46,15 @@ Route::group(['middleware'=>'admin'], function(){
     //Route to Categories in admin page
     Route::resource('admin/categories', 'AdminCategoriesController');
 
+    //Route for Media
+    Route::resource('admin/media', 'AdminMediasController');
+
+    //Route::get('admin/media/upload', ['as'=>'admin.media.upload', 'uses'=>'AdminMediasController@store']);
+
+    Route::resource('admin/comments', 'PostCommentsController');
+
+    Route::resource('admin/comments/replies', 'CommentRepliesController');
+
 });
 
 

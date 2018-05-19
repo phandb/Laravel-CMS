@@ -54,7 +54,7 @@
         {!! Form::submit('Create Post', ['class'=>'btn btn-primary'])!!}
     </div>
     
-    {!! Form::close() !!}
+{!! Form::close() !!}
 
 </div>
 <div class="row">

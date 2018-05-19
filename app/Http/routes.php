@@ -12,6 +12,13 @@
 */
 
 Route::get('/', function () {
+
+    // $username = 'dfdsf';
+    // $password = 'password';
+    // if (Auth::attempt(['username'=>$username, 'password'=>$password])){
+      
+    //     return redirect()->intended('/admin');
+    // }
     return view('welcome');
 });
 
@@ -26,16 +33,19 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-//Route to admin page
-Route::get('/admin', function(){
-
-    return view('admin.index');
-});
+//
+Route::get('/post/{id}', ['as'=>'home.post', 'uses'=>'AdminPostsController@post']);
 
 
 //Create a route group on 050718
 
 Route::group(['middleware'=>'admin'], function(){
+
+    //Route to admin page
+    Route::get('/admin', function(){
+
+        return view('admin.index');
+    });
 
     //Route to User in admin page
     Route::resource('admin/users', 'AdminUsersController');
@@ -58,6 +68,10 @@ Route::group(['middleware'=>'admin'], function(){
 });
 
 
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
 
 Route::auth();
 

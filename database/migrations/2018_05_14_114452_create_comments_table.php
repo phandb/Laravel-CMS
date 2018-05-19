@@ -14,7 +14,17 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('post_id')->unsigned()->index();
+            $table->integer('is_active')->default(0);
+            $table->string('author');
+           
+            $table->string('email');
+            $table->text('body');
             $table->timestamps();
+
+            //Set up foreign key between comments and posts table.  
+            //post_id must be matched up with user_id in posts table
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }
 

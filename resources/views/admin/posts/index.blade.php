@@ -18,6 +18,8 @@
         <th>Excerpt</th>
         <th>Author</th>
         <th>Content</th>
+        <th>Post Link</th>
+        <th>Comments</th>
         <th>Created</th>
         <th>Updated</th>
       </tr>
@@ -39,6 +41,9 @@
                 <td>{{$post->excerpt}}</td>
                 <td>{{$post->author}}</td>
                 <td>{{str_limit($post->content, 30)}}</td>
+                <td><a href="{{route('home.post', $post->id)}}">View Post</a></td>
+                <td><a href="{{route('admin.comments.show', $post->id)}}">View Comments</a></td>
+
                 <td>{{$post->created_at->diffForhumans()}}</td>
                 <td>{{$post->updated_at->diffForHumans()}}</td>
             </tr>

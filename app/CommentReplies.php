@@ -11,6 +11,7 @@ class CommentReplies extends Model
         'comment_id',
         'author',
         'email',
+        'photo',
         'body',
         'is_active'
 
@@ -19,6 +20,6 @@ class CommentReplies extends Model
     //Setup relationship with comment table
     //One reply belongs to on comment
     public function comment(){
-        return $this->belongsTo('App\Comment');
+        return $this->belongsTo('App\Comments');
     }
 }

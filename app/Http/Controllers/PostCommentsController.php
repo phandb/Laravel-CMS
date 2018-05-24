@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth; 
 use App\Http\Requests;
 use App\Comments;
 
@@ -22,7 +22,7 @@ class PostCommentsController extends Controller
 
         
     }
-
+/**************************************************************************** */
     /**
      * Show the form for creating a new resource.
      *
@@ -32,7 +32,7 @@ class PostCommentsController extends Controller
     {
         //
     }
-
+/*************************************************************************** */
     /**
      * Store a newly created resource in storage.
      *
@@ -42,8 +42,24 @@ class PostCommentsController extends Controller
     public function store(Request $request)
     {
         //
-    }
+        $user = Auth::user();
+        $data = [
+            'post_id'=>$request->post_id,
+            'author'=>$user->name,
+            'email'=>$user->email,
+            'photo'=>$user->photo->file,
+            'body'=>$request->body
 
+
+        ];
+        $comment = Comments::create($data);
+        $rquest->session()->flash('comment_message', 'Your message has been submitted and is waiting moderation');
+        return redirect()->back();
+        
+
+       
+    }
+/******************************************************************************** */
     /**
      * Display the specified resource.
      *
@@ -53,21 +69,14 @@ class PostCommentsController extends Controller
     public function show($id)
     {
         //
-        $user = Auth::user();
-        $data = [
-            'post_id'=>$rquest->post_id,
-            'author'=>$user->name,
-            'email'=>$user->email,
-            'photo'=>$user->photo->file,
-            'body'=>$request->body
+        $post = Post::findOrFail($id);
 
+        $comments = $post->comments;
 
-        ];
-        $comment = Comment::create($data);
-        $rquest->session()->flash('comment_message', 'Your message has been submitted and is waiting moderation');
-        return redirect()->back();
+        return view('admin.comments.show', compact(comments));
+       
     }
-
+/************************************************************************************* */
     /**
      * Show the form for editing the specified resource.
      *
@@ -78,7 +87,7 @@ class PostCommentsController extends Controller
     {
         //
     }
-
+/**************************************************************************************** */
     /**
      * Update the specified resource in storage.
      *
@@ -89,8 +98,11 @@ class PostCommentsController extends Controller
     public function update(Request $request, $id)
     {
         //
-    }
 
+        Comment:findOrFail($id)->update($request->all());
+        return redirect('/admin/comments');
+    }
+/**************************************************************************************** */
     /**
      * Remove the specified resource from storage.
      *
@@ -100,5 +112,7 @@ class PostCommentsController extends Controller
     public function destroy($id)
     {
         //
+        Comments::findOrFail($id)->delete();
+        return redirect()->back();
     }
 }

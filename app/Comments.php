@@ -12,6 +12,7 @@ class Comments extends Model
             'post_id',
             'author',
             'email',
+            'photo',
             'body',
             'is_active'
 
@@ -22,7 +23,7 @@ class Comments extends Model
     //a comment has many replies
     public function replies(){
 
-        return $this->hasMany('App\CommentReply');
+        return $this->hasMany('App\CommentReplies');
     }
 
 

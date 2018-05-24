@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth; 
 use App\Http\Requests;
+use App\Comments;
 
 class CommentRepliesController extends Controller
 {
@@ -39,6 +40,26 @@ class CommentRepliesController extends Controller
         //
     }
 
+
+    public function createReply(Request $request){
+
+         //
+         $user = Auth::user();
+         $data = [
+             'comment_id'=>$request->comment_id,
+             'author'=>$user->name,
+             'email'=>$user->email,
+             'photo'=>$user->photo->file,
+             'body'=>$request->body
+ 
+ 
+         ];
+         CommentReplies::create($data);
+         $rquest->session()->flash('reply_message', 'Your reply has been submitted and is waiting moderation');
+         return redirect()->back();
+
+    }
+
     /**
      * Display the specified resource.
      *
@@ -48,6 +69,10 @@ class CommentRepliesController extends Controller
     public function show($id)
     {
         //
+        $comment= Comments::findOrfail($id);
+        $replies = $comment->replies;
+        return view('admin.comment.replies.show', compact('replies'));
+
     }
 
     /**
@@ -71,6 +96,8 @@ class CommentRepliesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        CommentReplies::findOrFail($id)->update($request-all());
+        return redirect()->back();
     }
 
     /**
@@ -82,5 +109,8 @@ class CommentRepliesController extends Controller
     public function destroy($id)
     {
         //
+
+        CommentReplies::findOrFail($id)->delete();
+        return redirect()->back();
     }
 }

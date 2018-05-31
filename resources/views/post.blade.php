@@ -32,7 +32,7 @@
 
                 <hr>
 
-                @if(Session::has('ccomment_message'))
+                @if(Session::has('comment_message'))
                     {{session('comment_message')}}
                 @endif
 
@@ -74,134 +74,133 @@
 
             @if(count($comments) > 0)
 
-            @foreach($comments as $comment)
+                @foreach($comments as $comment)
 
-                <!-- Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img height="50" class="media-object" src="{{$comment->photo}}" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">{{$comment->author}}
-                            <small>{{$comment->created_at->diffForHumans()}}</small>
-                        </h4>
-                        <p>{{$comment->body}}</p>
-
-
-                        @if(count($comment->replies) > 0)
-
-                            @foreach($comment->replies as $reply)
+                    <!-- Comment -->
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                            <!--img height="50" class="media-object" src="{{$comment->photo}}" alt=""-->
+                            <img height="50" class="media-object" src="{{Auth::user()->gravatar}}" alt="">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{$comment->author}}
+                                <small>{{$comment->created_at->diffForHumans()}}</small>
+                            </h4>
+                            <p>{{$comment->body}}</p>
 
 
-                                @if($reply->is_active == 1)
+                            @if(count($comment->replies) > 0)
 
-                             <!-- Nested Comment -->
-                                <div class="nested-comment media">
-                                    <a class="pull-left" href="#">
-                                        <img height = "50" class="media-object" src="{{$reply->photo}}" alt="">
-                                    </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">{{$reply->author}}
-                                            <small>{{$reply->created_at->diffForHumans()}}</small>
-                                        </h4>
-                                        <p>{{$reply->body}}</p>
-                                    </div>
+                                @foreach($comment->replies as $reply)
 
 
-                                    <div class="comment-reply-container">
+                                    @if($reply->is_active == 1)
 
-                                         <button class="toggle-reply btn btn-primary pull-right">Reply</button>
+                                    <!-- Nested Comment -->
+                                        <div class="nested-comment media">
+                                            <a class="pull-left" href="#">
+                                                <img height = "50" class="media-object" src="{{$reply->photo}}" alt="">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">{{$reply->author}}
+                                                    <small>{{$reply->created_at->diffForHumans()}}</small>
+                                                </h4>
+                                                <p>{{$reply->body}}</p>
+                                            </div>
 
-                                        <div class="comment-reply col-sm-6">
 
-                                            {{!! Form::open(['method'=>'POST', 'action'=> 'CommentRepliesController@createReply']) !!}
+                                            <div class="comment-reply-container">
 
-                                                <input type="hidden" name="comment_id" value="{{$comment->id}}">
-                                                
-                                                <div class="form-group">
-                                                        {!! Form::label('body', 'Body:') !!}
-                                                        {!! Form::textarea('body',  null, ['class'=>'form-control', 'rows'=>1]) !!}
-                                                </div>
+                                                <button class="toggle-reply btn btn-primary pull-right">Reply</button>
 
-                                            
-                                                <div class="form-group">
+                                                <div class="comment-reply col-sm-6">
+
+                                                    {{!! Form::open(['method'=>'POST', 'action'=> 'CommentRepliesController@createReply']) !!}
+
+                                                        <input type="hidden" name="comment_id" value="{{$comment->id}}">
+                                                        
+                                                        <div class="form-group">
+                                                                {!! Form::label('body', 'Body:') !!}
+                                                                {!! Form::textarea('body',  null, ['class'=>'form-control', 'rows'=>1]) !!}
+                                                        </div>
+
                                                     
-                                                    {!! Form::submit('Submit', ['class'=>'btn btn-primary'])!!}
+                                                        <div class="form-group">
+                                                            
+                                                            {!! Form::submit('Submit', ['class'=>'btn btn-primary'])!!}
+                                                        </div>
+                                                
+                                                    {!! Form::close() !!}
+
                                                 </div>
-                                        
-                                            {!! Form::close() !!}
 
-                                    </div>
+                                            </div>
+                                        <!-- End Nested Comment -->
+                                        </div>
+                                    @else 
+                                
+                                    <h1 class="text-center">No Replies</h1>
 
-                                </div>
-                                <!-- End Nested Comment -->
-                            </div>
-                            @else 
-                            
-                                <h1 class="text-center">No Replies</h1>
+                                    @endif
+
+                                @endforeach
 
                             @endif
 
-                         @endforeach
 
-                    @endif
-
-
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
 
             @endif
+      
 
+@endsection
 
-
-                
-
-@stop
 
 @section('sidebar')
 
-     <!-- Blog Search Well -->
-     <div class="well">
-        <h4>Blog Search</h4>
-        <div class="input-group">
-            <input type="text" class="form-control">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button">
-                    <span class="glyphicon glyphicon-search"></span>
+    <!-- Blog Search Well -->
+    <div class="well">
+         <h4>Blog Search</h4>
+    <div class="input-group">
+        <input type="text" class="form-control">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search"></span>
             </button>
-            </span>
-        </div>
-        <!-- /.input-group -->
+        </span>
+    </div>
+    <!-- /.input-group -->
     </div>
 
     <!-- Blog Categories Well -->
     <div class="well">
-        <h4>Blog Categories</h4>
-        <div class="row">
-            <div class="col-lg-12">
-                <ul class="list-unstyled">
-                    @foreach($categories as $category)
-                        <li><a href="#">{{$category->Name}}</a></li>
-                    @endforeach
-                    
-                </ul>
-            </div>
-           
+    <h4>Blog Categories</h4>
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="list-unstyled">
+                @foreach($categories as $category)
+                    <li><a href="#">{{$category->Name}}</a></li>
+                @endforeach
+                
+            </ul>
         </div>
-        <!-- /.row -->
+        
+    </div>
+    <!-- /.row -->
     </div>
 
     <!-- Side Widget Well -->
     <div class="well">
-        <h4>Side Widget Well</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+    <h4>Side Widget Well</h4>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
     </div>
-               
+            
 
 
 
-@stop
+@endsection
 
 
 @section('scripts')
@@ -214,4 +213,4 @@
         });
     </script>
 
-@stop
+@endsection

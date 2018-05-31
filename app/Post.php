@@ -2,11 +2,35 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+use Cviebrock\EloquentSluggable\Sluggable;
+
+use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers; // We imported this
+
+class Post extends Model 
 {
-    //
+    use Sluggable;
+    use SluggableScopeHelpers; // Here we import the trait 
+
+    /**
+     * Sluggable configuration.
+     *
+     * @var array
+     */
+    public function sluggable() {
+        return [
+            'slug' => [
+                'source'         => 'title',
+                'separator'      => '-',
+                'includeTrashed' => true,
+            ]
+        ];
+    }
+
+
+
+    //Mass Assignment
     protected $fillable = [
         'category_id',
         'photo_id',
@@ -18,6 +42,11 @@ class Post extends Model
 
 
     ];
+
+
+   
+
+    
 
     /******Relationships****************************** */
     //Post has one user
@@ -41,7 +70,8 @@ class Post extends Model
     //a post has many comments
     public function comments(){
 
-        return $this->hasMany('App\Posts');
+       // return $this->hasMany('App\Post');
+        return $this->hasMany('App\Comments', 'post_id');
     }
 
     //

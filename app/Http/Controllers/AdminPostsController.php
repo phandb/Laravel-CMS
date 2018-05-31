@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use File;
 
+if (version_compare(PHP_VERSION, '7.2.0', '>=')) {
+    // Ignores notices and reports all other kinds... and warnings
+    error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
+    // error_reporting(E_ALL ^ E_WARNING); // Maybe this is enough
+}
+
 class AdminPostsController extends Controller
 {
 
@@ -31,8 +37,9 @@ class AdminPostsController extends Controller
     public function index()
     {
         //
-        $posts = Post::all();
-        return view('admin.posts.index', compact('posts'));
+        //$posts = Post::all();
+        $posts = Post::paginate(5);
+        return view('admin.posts.index', compact('posts', 'categories'));
     }
 /************************CREATE************************************ */
     /**
@@ -155,12 +162,20 @@ class AdminPostsController extends Controller
 
     }
 
-
-    public function post($id){
-        $post = Post::findOrFail($id);
+    public function post($slug){
+        $post = Post::findBySlugOrFail($slug);
         $comments = $post->comments()->whereIsActive(1)->get();
         
         return view('post', compact('post', 'comments'));
 
     }
+
+
+    // public function post($id){
+    //     $post = Post::findOrFail($id);
+    //     $comments = $post->comments()->whereIsActive(1)->get();
+        
+    //     return view('post', compact('post', 'comments'));
+
+    // }
 }

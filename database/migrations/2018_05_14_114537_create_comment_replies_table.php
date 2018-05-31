@@ -36,5 +36,6 @@ class CreateCommentRepliesTable extends Migration
     public function down()
     {
         Schema::drop('comment_replies');
+        $table->dropForeign('comment_replies_comment_id_foreign');
     }
 }

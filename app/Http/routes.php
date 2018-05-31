@@ -20,6 +20,7 @@ Route::get('/', function () {
     //     return redirect()->intended('/admin');
     // }
     return view('welcome');
+   // return view('layouts/blog-home');
 });
 
 

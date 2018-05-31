@@ -39,9 +39,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
-                </a>
+                <a class="navbar-brand" href="{{ url('/') }}">Laravel Dong Hanh Agape'</a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">

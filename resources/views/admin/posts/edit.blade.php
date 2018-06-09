@@ -4,6 +4,12 @@
 
 @section('content')
 
+@include('includes.tinyeditor')
+<style>
+    #mceu_39{
+        display: none;
+    }
+</style>
 
 <h1>Edit Post</h1>
 
@@ -12,7 +18,7 @@
 <div class="row">
         <div class="col-sm-3">
 
-                <img src="{{$post->photo ? $post->photo->file : 'http://placehold.it/200x200'}}" alt="" class="img-responsive img-rounded">
+                <img src="{{$post->photo ? $post->photo->file : $post->photoPlaceholder()}}" alt="" class="img-responsive img-rounded">
         
         </div>
          <div class="col-sm-9">

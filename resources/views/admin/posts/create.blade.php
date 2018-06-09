@@ -3,6 +3,13 @@
 
 
 @section('content')
+    <!-- Add tinyMCE to content)  -->
+    @include('includes.tinyeditor')
+    <style>
+        #mceu_39{
+            display: none;
+        }
+    </style>
 
 <h1>Create Post</h1>
 

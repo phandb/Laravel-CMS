@@ -50,7 +50,8 @@ class AdminPostsController extends Controller
     public function create()
     {
         //Pass in category names
-        $categories = Category::lists('name','id')->all();
+        //using pluck() in laravel 5.3 instead of lists()
+        $categories = Category::pluck('name','id')->all();
         return view('admin.posts.create', compact('categories'));
     }
 /********************STORE****************************************** */
@@ -101,7 +102,8 @@ class AdminPostsController extends Controller
     {
         //
         $post = Post::findOrFail($id);
-        $categories = Category::lists('name', 'id')->all();
+        //using pluck() in laravel 5.3 instead of lists()
+        $categories = Category::pluck('name', 'id')->all();
         return view('admin.posts.edit', compact('post', 'categories'));
     }
 /**********************UPDATE******************************* */
@@ -163,6 +165,7 @@ class AdminPostsController extends Controller
     }
 
     public function post($slug){
+        
         $post = Post::findBySlugOrFail($slug);
         $comments = $post->comments()->whereIsActive(1)->get();
         

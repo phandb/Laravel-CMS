@@ -23,12 +23,12 @@
                 <hr>
                
                 <!-- Preview Image -->
-                <img class="img-responsive"  src="{{$post->photo ? $post->photo->file : 'http://placehold.it/900x300'}} " alt="">
+                <img class="img-responsive"  src="{{$post->photo ? $post->photo->file : $post->photoPlaceholder()}} " alt="">
 
                 <hr>
 
                 <!-- Post Content -->
-                <p class="lead">{{$post->content}}</p>
+                <p class="lead">{!! $post->content !!}</p>
 
                 <hr>
 
@@ -46,7 +46,7 @@
 
 
 
-                    {{!! Form::open(['method'=>'POST', 'action'=> 'PostCommentsController@store']) !!}
+                    {{ Form::open(['method'=>'POST', 'action'=> 'PostCommentsController@store']) }}
 
                         <input type="hidden" name="post_id" value="{{$post->id}}">
                         

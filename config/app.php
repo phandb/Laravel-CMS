@@ -159,6 +159,10 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /*Add service provider for File Manager on 6/8/18*/
+        Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         
 
     ],
@@ -209,6 +213,8 @@ return [
         //Add aliases Form and Html for LaravelCollective/html on 041918
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        //Add alias for Filemanager on 6/8/18
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

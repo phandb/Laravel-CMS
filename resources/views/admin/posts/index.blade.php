@@ -10,10 +10,11 @@
       <tr>
         <th>ID</th>
         <th>Photo</th>
+        <th>Title</th>
         <th>User</th>
         <th>Category</th>
         
-        <th>Title</th>
+        
         <th>Subtitle</th>
         <th>Excerpt</th>
         <th>Author</th>
@@ -33,14 +34,17 @@
             <tr>
                 <td>{{$post->id}}</td>
                 <td><img height="50" src="{{$post->photo ? $post->photo->file : 'http://placehold.it/50x50'}} " alt=""></td>
-                <td><a href="{{route('admin.posts.edit',  $post->id)}}">{{ $post->user->name}}</a></td>
+                <td><a href="{{route('admin.posts.edit',  $post->id)}}">{{$post->title}}</a></td>
+
+                <td>{{ $post->user->name}}</td>
                 <td>{{$post->category ? $post->category->name : 'No Category Assigned'}}</td>
                 
-                <td>{{$post->title}}</td>
+                
                 <td>{{$post->subtitle}}</td>
                 <td>{{$post->excerpt}}</td>
                 <td>{{$post->author}}</td>
                 <td>{{str_limit($post->content, 30)}}</td>
+                
                 <td><a href="{{route('home.post', $post->slug)}}">View Post</a></td>
                 <td><a href="{{route('admin.comments.show', $post->id)}}">View Comments</a></td>
 

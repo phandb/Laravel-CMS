@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Post;
+use App\Category;
+use Carbon\Carbon;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,8 +27,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
+       // $user = Auth::user();
+      // $year = Carbon::now()->year;
+       $posts = Post::paginate(2);
+        $categories = Category::all();
+        return view('front/home', compact('posts', 'categories', 'year'));
+    }
 
-        return view('post', compact('user'));
+
+    public function post($slug){
+        
+        $post = Post::findBySlugOrFail($slug);
+        $categories = Category::all();
+        $comments = $post->comments()->whereIsActive(1)->get();
+        
+        return view('post', compact('post', 'comments', 'categories'));
+
     }
 }

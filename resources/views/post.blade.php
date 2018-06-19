@@ -3,6 +3,21 @@
 
 
 @section('content')
+
+<div class="container-fluid w-100">
+    <div class="row">
+            
+        <div class="col-12">
+                  
+                <img class="img-responsive w-100" src="{{ asset('images/1529155658home.png') }}" alt="">
+            
+        </div>
+    </div>
+</div>
+    
+<div class="container">
+
+
     <div class="row">
 
 
@@ -11,12 +26,12 @@
         <!-- Blog Post -->
 
                 <!-- Title -->
-                <h1>{{$post->title}}</h1>
-
+                <h1>{{ucwords(strtolower($post->title))}}</h1>
+                <p class="text-muted"><em> {{ucwords(strtolower($post->excerpt))}}</em></p>
+                
                 <!-- Author -->
-                <p class="lead">
-                    by {{$post->author}}</a>
-                </p>
+               
+                <p class="lead "><small> by {{ $post->author }}</small></p>
 
                 <hr>
 
@@ -31,7 +46,7 @@
                 <hr>
 
                 <!-- Post Content -->
-                <p class="lead">{!! $post->content !!}</p>
+                <p class="lead">{{ $post->content }}</p>
 
                 <hr>
 

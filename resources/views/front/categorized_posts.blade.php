@@ -5,8 +5,21 @@
     <div class="row">
         
             <div class="col-12">
-
-                
+                @if((category->name) equals "All Categories")
+                    <img class="img-responsive w-100" src="{{ asset('images/1529155658home.png') }}" alt="home feature image">
+                @elseif((category->name) equals "Advent")
+                    <img class="img-responsive w-100" src="{{ asset('images/1529155657AdventBanner.jpg') }}" alt="home feature image">
+                @elseif((category->name) equals "Christmas")
+                    <img class="img-responsive w-100" src="{{ asset('images/1529155657christmas-banner.gif') }}" alt="home feature image">
+                @elseif((category->name) equals "Easter")
+                    <img class="img-responsive w-100" src="{{ asset('images/1529155658Easter banner.jpg') }}" alt="home feature image">
+                @elseif((category->name) equals "Triduum")
+                    <img class="img-responsive w-100" src="{{ asset('images/1529155658EasterTriduumBanner.jpg') }}" alt="home feature image">
+                @elseif((category->name) equals "Lent")
+                    <img class="img-responsive w-100" src="{{ asset('images/1529155658LentBanner.jpg') }}" alt="home feature image">
+                @elseif((category->name) equals "Ordinary Time")
+                    <img class="img-responsive w-100" src="{{ asset('images/1529155659Ordinarytimebanner.jpg') }}" alt="home feature image">
+                @endif
 
         
             </div>
@@ -39,7 +52,7 @@
                     <hr>
                     <p class="lead">{!! str_limit($post->content, 500) !!}</p>
                     <a class="btn btn-primary" href="{{route('home.post', $post->slug)}}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-                   
+                    
                     <hr>
                 @endforeach
 

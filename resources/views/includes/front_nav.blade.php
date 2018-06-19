@@ -28,7 +28,7 @@
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container -->
-        </nav>
+    </nav>
     
         <!-- Page Content -->
-        <div class="container">
+    

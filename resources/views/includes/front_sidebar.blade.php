@@ -22,7 +22,8 @@
                 <ul class="list-unstyled">
                     @if($categories)
                         @foreach($categories as $category)
-                            <li><a href="#">{{$category->name}}</a></li>
+                            <li><a href="{{route('home.post', $category->name)}}">{{$category->name}}</a></li>
+                            
                         @endforeach
                     @endif
                 </ul>

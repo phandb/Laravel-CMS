@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- Add tinyMCE to content)  -->
-    @include('includes.tinyeditor')
+    <!-- @include('includes.tinyeditor')  -->
     <style>
         #mceu_39{
             display: none;

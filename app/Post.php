@@ -1,7 +1,8 @@
 <?php
 
 namespace App;
-
+use App\Scopes\AgeScope;
+use Illuminate\Database\Eloquent\Scope;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 
@@ -77,6 +78,10 @@ class Post extends Model
     public function photoPlaceholder(){
 
         return "http://placehold.it/900x300";
+    }
+
+    public function featureImage(){
+        return "/public/images/1529123925home.png";
     }
 
     //

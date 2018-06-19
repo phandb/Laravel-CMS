@@ -21,6 +21,7 @@ Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::get('/', 'HomeController@index');
 
+
 Route::group(['middleware'=>'admin'], function(){
 
     Route::get('/admin', 'AdminController@index');

@@ -29,7 +29,7 @@ class HomeController extends Controller
     {
        // $user = Auth::user();
       // $year = Carbon::now()->year;
-       $posts = Post::paginate(2);
+        $posts = Post::paginate(5);
         $categories = Category::all();
         return view('front/home', compact('posts', 'categories', 'year'));
     }
